@@ -76,8 +76,8 @@ let downloadCSV = () => {
       cart.push({
         code,
         size,
-        price: nodeSalePrice.innerText,
-        totalPrice: nodeTotalPrice.innerText,
+        price: nodeSalePrice? nodeSalePrice.innerText :"",
+        totalPrice: nodeTotalPrice ? nodeTotalPrice.innerText: "",
       });
     }
   }
