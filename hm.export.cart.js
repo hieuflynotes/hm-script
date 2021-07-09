@@ -58,6 +58,12 @@ let downloadCSV = () => {
       }]/article/div[1]/div[2]/span[1]`
     );
 
+    let nodeOriginPrice = getElementByXpath(
+      `//div[@id='sidebar-sticky-boundary']/section[1]/div/ul/li[${
+        i + 1
+      }]/article/div[1]/span`
+    );
+
     let nodeTotalPrice = getElementByXpath(
       `//div[@id='sidebar-sticky-boundary']/section[1]/div/ul/li[${
         i + 1
@@ -68,7 +74,9 @@ let downloadCSV = () => {
     let size = nodeSize
       ? nodeSize.innerText.replace("Few pieces left", "")
       : "";
-    let price = nodePriceToNumber(nodeSalePrice);
+      let originPrice = nodePriceToNumber(nodeOriginPrice);
+      let price = nodeSalePrice ? nodePriceToNumber(nodeSalePrice) : originPrice;
+
     let totalPrice = nodePriceToNumber(nodeTotalPrice);
     let quantity = Math.round(totalPrice / price);
     let total;
@@ -76,7 +84,7 @@ let downloadCSV = () => {
       cart.push({
         code,
         size,
-        price: nodeSalePrice? nodeSalePrice.innerText :"",
+        price: nodeSalePrice? nodeSalePrice.innerText :nodeOriginPrice?nodeOriginPrice.innerText : "",
         totalPrice: nodeTotalPrice ? nodeTotalPrice.innerText: "",
       });
     }
