@@ -58,7 +58,8 @@ let getCart = () => {
     let totalPrice = nodePriceToNumber(nodeTotalPrice);
     let quantity = Math.round(totalPrice / price);
     let realPrice = price || originPrice;
-    let buyPrice = realPrice > 5 ? Math.round((realPrice - 3 - 0.25 * realPrice) * 10 )/10 : realPrice >= 4 ? realPrice - 3 : -1;
+    let buyPrice =
+      realPrice > 5 ? Math.round((realPrice - 3 - 0.25 * realPrice) * 10) / 10 : realPrice >= 4 ? realPrice - 3 : -1;
     let total;
     for (let i = 0; i < quantity; i++) {
       cart.push({
@@ -66,8 +67,8 @@ let getCart = () => {
         size,
         price: price || originPrice,
         buyPrice,
-        orderNumber: "",
-        link:`https://www2.hm.com/en_gb/productpage.${code}.html`
+        orderNumber: 'order number',
+        link: `https://www2.hm.com/en_gb/productpage.${code}.html`,
       });
     }
   }
